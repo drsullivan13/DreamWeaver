@@ -45,6 +45,11 @@ export default function VoiceInput({ onResult }: VoiceInputProps) {
   }, [pulseAnim]);
 
   const handleWebSpeech = useCallback(() => {
+    if (typeof window === 'undefined') {
+      setModalVisible(true);
+      return;
+    }
+
     const SpeechRecognition =
       (window as any).webkitSpeechRecognition ||
       (window as any).SpeechRecognition;
